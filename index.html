@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ofertas del MUNDIAL | Computadoras en Oferta y Catálogo de Tecnología</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description"
+    content="Aprovechá las mejores ofertas del Mundial en computadoras listas para usar. Equipos gamer, de oficina y hogar con componentes garantizados. ¡Últimas unidades en stock!">
+  <meta name="keywords"
+    content="computadoras, ofertas, computadoras baratas, pc gamer, pc oficina, ofertas del mundial, tecnologia retail">
+  <meta name="author" content="Tech Retail">
+
+  <!-- Estilos CSS Separados -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- ==========================================
+       HERO BANNER / ENCABEZADO
+       ========================================== -->
+  <header>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <!-- Tag superior de oferta -->
+      <div class="hero-tag">¡Super Descuentos!</div>
+
+      <!-- H1 Único para SEO con estilos de neón -->
+      <h1>COMPUTADORAS <span class="highlight">EN OFERTA</span></h1>
+
+      <!-- Subtítulo / Encabezado personalizado por el usuario -->
+      <div class="hero-subtitle">Ofertas del MUNDIAL</div>
+
+      <!-- Indicador global de stock en tiempo crítico -->
+      <div class="hero-badge-stock-global">
+        ¡ÚLTIMAS UNIDADES EN STOCK!
+      </div>
+
+      <!-- Ventajas y características principales (basadas en el folleto) -->
+      <div class="header-features">
+        <div class="feature-item">
+          <!-- Icono Windows -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="16" height="16" fill="currentColor">
+            <path
+              d="M0 93.7l183.6-25.3v177.4H0V93.7zm0 189.6h183.6v177.4L0 435.4V283.3zM201.6 66l246.4-34v218.6H201.6V66zm246.4 217.3v218.6l-246.4-34V283.3h246.4z" />
+          </svg>
+          <span>Windows 11 Pro Incluido</span>
+        </div>
+        <div class="feature-item">
+          <!-- Icono Office -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="16" height="16" fill="currentColor">
+            <path
+              d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm64 236c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12v8z" />
+          </svg>
+          <span>Office 2019 Profesional</span>
+        </div>
+        <div class="feature-item">
+          <!-- Icono Garantía / Check -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="16" height="16" fill="currentColor">
+            <path
+              d="M256 0c141.4 0 256 114.6 256 256S397.4 512 256 512 0 397.4 0 256 114.6 0 256 0zM375 199c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-149 149-69-69c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l86 86c9.4 9.4 24.6 9.4 33.9 0L375 199z" />
+          </svg>
+          <span>Equipos Probados</span>
+        </div>
+        <div class="feature-item">
+          <!-- Icono Listo para usar / Cohete -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="16" height="16" fill="currentColor">
+            <path
+              d="M505.2 19.1C507.5 13.9 506.2 7.7 501.9 3.8C497.6-.2 491.4-1.2 486.1 1.1L23.4 200.7C17.6 203.2 13.9 209 14 215.3C14.1 221.6 18 227.2 23.8 229.5L181.6 292.6L244.7 450.4C247 456.2 252.6 460.1 258.9 460.2C259.2 460.2 259.6 460.2 259.9 460.2C266.2 460.1 272 456.4 274.5 450.6L505.2 19.1z" />
+          </svg>
+          <span>Listos para Usar</span>
+        </div>
+      </div>
+
+      <p class="ilustrative-note">Imágenes ilustrativas. Los gabinetes varían según configuración.</p>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       BARRA DE FILTROS & BÚSQUEDA INTERACTIVA
+       ========================================== -->
+  <div class="filter-bar">
+    <div class="filter-group search">
+      <label for="catalog-search" class="filter-label">Buscar PC:</label>
+      <input type="text" id="catalog-search" class="filter-input" placeholder="Ej: i5, gamer, 8GB, SSD, APU...">
+    </div>
+
+    <div class="filter-group select-filter">
+      <label for="section-filter" class="filter-label">Sección:</label>
+      <select id="section-filter" class="filter-select">
+        <option value="all">Todas las Categorías</option>
+        <option value="1">1. Línea Gamer</option>
+        <option value="2">2. Hogar y Oficina</option>
+        <option value="3">3. Potencia (Gen 2 y 3)</option>
+        <option value="4">4. Más Potencia (Gen 2)</option>
+        <option value="5">5. Gen 4 Rendimiento</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       CONTENIDO PRINCIPAL DEL CATÁLOGO (Renderizado dinámico)
+       ========================================== -->
+  <main id="catalog-sections-container">
+    <!-- Aquí app.js renderizará dinámicamente cada sección de PCs (1 a 5) -->
+    <!-- Se mantiene un loader inicial para excelente UX -->
+    <div style="text-align: center; padding: 4rem; color: var(--neon-cyan);">
+      <p>Cargando catálogo tecnológico...</p>
+    </div>
+  </main>
+
+  <!-- ==========================================
+       SECCIÓN DE ACCESORIOS ("Personalizá tu compra")
+       ========================================== -->
+  <section class="accessories-section" id="accesorios">
+    <div class="accessories-header">
+      <h2>Personalizá tu Compra</h2>
+      <p>Podés agregar accesorios y mejoras con precios promocionales directo en tu consulta de WhatsApp</p>
+    </div>
+    <div class="accessories-grid" id="accessories-grid-container">
+      <!-- Aquí app.js renderizará los accesorios (Monitores, RAM, SSD, Kits, etc.) -->
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SECCIÓN DE INFORMACIÓN ADICIONAL & GARANTÍA
+       ========================================== -->
+  <section class="info-cards-container" style="max-width: 1200px; margin: 0 auto 5rem; padding: 0 1.5rem;">
+    <!-- Tarjeta de Información Importante (Folleto original) -->
+    <div class="info-card important-info">
+      <h3>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="18" height="18" fill="currentColor">
+          <path
+            d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .3-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24v112c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z" />
+        </svg>
+        Información Importante
+      </h3>
+      <ul>
+        <li><strong>Imágenes Ilustrativas:</strong> Los gabinetes, diseños, colores y componentes visuales pueden variar
+          según disponibilidad y configuración.</li>
+        <li><strong>Garantía Asegurada:</strong> Todas las configuraciones son verificadas y garantizadas por técnicos
+          especializados.</li>
+        <li><strong>Listas para Usar:</strong> Las computadoras se entregan probadas con el sistema operativo y
+          programas esenciales configurados.</li>
+      </ul>
+    </div>
+
+    <!-- Tarjeta de Compra Ideal (Folleto original) -->
+    <div class="info-card promo-info">
+      <h3>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="18" height="18" fill="currentColor">
+          <path
+            d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
+        </svg>
+        Armá tu PC Ideal
+      </h3>
+      <ul>
+        <li><strong>Kits Completos:</strong> Elegí gabinete, monitor y periféricos con precios preferenciales al
+          realizar tu pedido.</li>
+        <li><strong>Descuentos Especiales:</strong> ¡Consultá por WhatsApp por combos personalizados y promociones
+          exclusivas!</li>
+        <li><strong>Atención Inmediata:</strong> Nuestro equipo de ventas te ayudará a armar la configuración adecuada
+          para tu presupuesto.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       BOTTOM BAR / PIE DE PÁGINA COMERCIAL
+       ========================================== -->
+  <div class="bottom-bar">
+    <div class="bottom-bar-inner">
+      <div class="bottom-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="14" height="14" fill="currentColor">
+          <path
+            d="M256 0c141.4 0 256 114.6 256 256S397.4 512 256 512 0 397.4 0 256 114.6 0 256 0zm37.5 160h-75c-10.7 0-19.5 8.8-19.5 19.5v153c0 10.7 8.8 19.5 19.5 19.5h75c10.7 0 19.5-8.8 19.5-19.5v-153c0-10.7-8.8-19.5-19.5-19.5z" />
+        </svg>
+        Equipos Probados
+      </div>
+      <div class="bottom-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="14" height="14" fill="currentColor">
+          <path
+            d="M480 96H32C14.3 96 0 110.3 0 128v256c0 17.7 14.3 32 32 32h448c17.7 0 32-14.3 32-32V128c0-17.7-14.3-32-32-32zM96 352H64v-32h32v32zm0-64H64v-32h32v32zm0-64H64v-32h32v32zm128 128h-96v-32h96v32zm0-64h-96v-32h96v32zm0-64h-96v-32h96v32zm192 128h-64v-32h64v32zm0-64h-64v-32h64v32zm0-64h-64v-32h64v32z" />
+        </svg>
+        Componentes de Calidad
+      </div>
+      <div class="bottom-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="14" height="14" fill="currentColor">
+          <path
+            d="M256 0c141.4 0 256 114.6 256 256s-114.6 256-256 256S0 397.4 0 256 114.6 0 256 0zm0 80c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176S353.2 80 256 80z" />
+        </svg>
+        Garantía y Soporte
+      </div>
+      <div class="bottom-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="14" height="14" fill="currentColor">
+          <path
+            d="M505.2 19.1C507.5 13.9 506.2 7.7 501.9 3.8C497.6-.2 491.4-1.2 486.1 1.1L23.4 200.7C17.6 203.2 13.9 209 14 215.3C14.1 221.6 18 227.2 23.8 229.5L181.6 292.6L244.7 450.4C247 456.2 252.6 460.1 258.9 460.2C259.2 460.2 259.6 460.2 259.9 460.2C266.2 460.1 272 456.4 274.5 450.6L505.2 19.1z" />
+        </svg>
+        Listos para usar
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer general -->
+  <footer>
+    <p>&copy; 2026 Ofertas del MUNDIAL. Todos los derechos reservados. Diseñado para exportación PDF por E-funservices
+    </p>
+    <p style="margin-top: 0.5rem; font-size: 0.75rem;">Para guardar este catálogo como PDF presione <strong>Ctrl +
+        P</strong> en Google Chrome y seleccione "Guardar como PDF".</p>
+  </footer>
+
+  <!-- ==========================================
+       WHATSAPP BOTÓN FLOTANTE (Dinámico)
+       ========================================== -->
+  <a id="whatsapp-float" target="_blank" aria-label="Consultar por WhatsApp"
+    title="Consultar ahora y aprovechá estas ofertas">
+    <!-- Icono de WhatsApp Vectorial -->
+    <svg class="float-wa-icon" viewBox="0 0 448 512">
+      <path
+        d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L3 496l133.9-35.2c32.6 17.5 69.3 26.8 106.8 26.8 122.4 0 222-99.6 222-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-79.8 21 21.4-77.8-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z" />
+    </svg>
+  </a>
+
+  <!-- Script JS Separado -->
+  <script src="app.js"></script>
+</body>
+
+</html>

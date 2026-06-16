@@ -1,0 +1,1348 @@
+/* ==========================================================================
+   CSS CATALOGO "OFERTAS DEL MUNDIAL"
+   Diseño: Tech Retail Cyberpunk / Premium Neon
+   ========================================================================== */
+
+/* Importación de Fuentes Modernas */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800;900&display=swap');
+
+/* Variables del Sistema de Diseño */
+:root {
+  /* Paleta de Colores Principal */
+  --bg-main: #060913;          /* Azul de fondo súper oscuro */
+  --bg-surface: #0c1223;       /* Fondo de tarjetas / superficies */
+  --bg-surface-hover: #151e36; /* Hover en superficies */
+  --border-color: rgba(255, 255, 255, 0.06);
+  
+  /* Neones y Acentos */
+  --neon-cyan: #00f0ff;
+  --neon-blue: #3b82f6;
+  --neon-purple: #d946ef;
+  --neon-orange: #f97316;
+  --neon-green: #22c55e;
+  --neon-red: #ef4444;
+  
+  /* Gradientes de Acentuación */
+  --gradient-cyber: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-blue) 50%, var(--neon-purple) 100%);
+  --gradient-header: linear-gradient(180deg, rgba(6, 9, 19, 0) 0%, rgba(6, 9, 19, 0.95) 100%);
+  
+  /* Tipografía */
+  --font-family-title: 'Outfit', 'Inter', sans-serif;
+  --font-family-body: 'Inter', sans-serif;
+  
+  /* Efectos */
+  --glow-cyan: 0 0 15px rgba(0, 240, 255, 0.25);
+  --glow-purple: 0 0 15px rgba(217, 70, 239, 0.25);
+  --glow-blue: 0 0 15px rgba(59, 130, 246, 0.25);
+  --glow-red: 0 0 12px rgba(239, 68, 68, 0.4);
+  --glow-green: 0 0 12px rgba(34, 197, 94, 0.4);
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --border-radius-lg: 16px;
+  --border-radius-md: 12px;
+  --border-radius-sm: 8px;
+}
+
+/* Reset de Estilos Básicos */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: #f1f5f9;
+  font-family: var(--font-family-body);
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Fondo decorativo con luces de neón difusas */
+body::before, body::after {
+  content: '';
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  filter: blur(120px);
+  z-index: -1;
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+body::before {
+  top: 10%;
+  left: 5%;
+  background: var(--neon-cyan);
+}
+
+body::after {
+  bottom: 25%;
+  right: 5%;
+  background: var(--neon-purple);
+}
+
+/* ==========================================================================
+   ENCABEZADO / HERO SECTION (Alineado con "Ofertas del MUNDIAL")
+   ========================================================================== */
+
+header {
+  position: relative;
+  padding: 5rem 1rem 3.5rem;
+  background-image: radial-gradient(ellipse at center, rgba(16, 24, 48, 0.8) 0%, var(--bg-main) 80%);
+  border-bottom: 1px solid var(--border-color);
+  text-align: center;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Efectos de líneas tecnológicas en el fondo */
+.hero-overlay::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(rgba(0, 240, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(circle, black, transparent 70%);
+  -webkit-mask-image: radial-gradient(circle, black, transparent 70%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.hero-title-container {
+  display: inline-block;
+  position: relative;
+}
+
+.hero-tag {
+  display: inline-block;
+  background: linear-gradient(90deg, var(--neon-blue), var(--neon-cyan));
+  color: #060913;
+  font-family: var(--font-family-title);
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 0.3rem 1.2rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+  box-shadow: var(--glow-cyan);
+}
+
+header h1 {
+  font-family: var(--font-family-title);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 900;
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+}
+
+header h1 span.highlight {
+  background: var(--gradient-cyber);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  position: relative;
+}
+
+/* Badge de Invierno / Promociones en Subtítulo */
+.hero-subtitle {
+  font-family: var(--font-family-title);
+  font-size: 1.3rem;
+  color: var(--neon-cyan);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.hero-subtitle::before,
+.hero-subtitle::after {
+  content: '❄️';
+  font-size: 1.2rem;
+}
+
+.hero-badge-stock-global {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid var(--neon-red);
+  color: #ff8a8a;
+  padding: 0.5rem 1.5rem;
+  border-radius: 50px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  display: inline-block;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  box-shadow: var(--glow-red);
+  animation: pulse-border 2s infinite;
+}
+
+/* Lista de ventajas globales en la cabecera */
+.header-features {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 3rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(30, 41, 59, 0.3);
+  border: 1px solid var(--border-color);
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--border-radius-sm);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #94a3b8;
+}
+
+.feature-item svg {
+  color: var(--neon-cyan);
+  filter: drop-shadow(0 0 3px var(--neon-cyan));
+}
+
+.ilustrative-note {
+  margin-top: 2rem;
+  font-size: 0.75rem;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ==========================================================================
+   FILTROS Y BUSCADOR INTERACTIVO
+   ========================================================================== */
+
+.filter-bar {
+  max-width: 1200px;
+  margin: -1.5rem auto 3rem;
+  padding: 1rem 1.5rem;
+  background: rgba(12, 18, 35, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--border-radius-md);
+  backdrop-filter: blur(12px);
+  z-index: 10;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-grow: 1;
+}
+
+.filter-group.search {
+  max-width: 450px;
+}
+
+.filter-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--neon-cyan);
+}
+
+.filter-input,
+.filter-select {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  background: #060913;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  color: #fff;
+  font-family: var(--font-family-body);
+  font-size: 0.9rem;
+  outline: none;
+  transition: var(--transition-smooth);
+}
+
+.filter-input:focus,
+.filter-select:focus {
+  border-color: var(--neon-cyan);
+  box-shadow: var(--glow-cyan);
+}
+
+/* ==========================================================================
+   SECCIONES DEL CATÁLOGO (Diseño fiel al Folleto)
+   ========================================================================== */
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.catalog-section {
+  margin-bottom: 5rem;
+}
+
+/* Encabezados de sección idénticos en color al folleto */
+.section-header {
+  border-radius: var(--border-radius-md);
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.section-header-title {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.8rem 1.5rem;
+  border-radius: var(--border-radius-sm);
+}
+
+.section-header h2 {
+  font-family: var(--font-family-title);
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.section-icon {
+  font-size: 1.5rem;
+}
+
+.section-desc {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  margin-top: 0.5rem;
+  padding-left: 0.5rem;
+}
+
+/* Colores específicos de sección */
+
+/* 1. Línea Gamer - Azul */
+.sec-gamer .section-header-title {
+  background: linear-gradient(90deg, #0284c7, #075985);
+  border-left: 5px solid var(--neon-cyan);
+}
+.sec-gamer .section-header {
+  border-bottom: 2px solid #0284c7;
+}
+
+/* 2. Hogar y Oficina - Verde/Cian */
+.sec-home .section-header-title {
+  background: linear-gradient(90deg, #047857, #065f46);
+  border-left: 5px solid var(--neon-green);
+}
+.sec-home .section-header {
+  border-bottom: 2px solid #047857;
+}
+
+/* 3. Opciones Económicas - Morado */
+.sec-eco .section-header-title {
+  background: linear-gradient(90deg, #6d28d9, #5b21b6);
+  border-left: 5px solid var(--neon-purple);
+}
+.sec-eco .section-header {
+  border-bottom: 2px solid #6d28d9;
+}
+
+/* 4. Más Potencia - Naranja/Marrón */
+.sec-potencia .section-header-title {
+  background: linear-gradient(90deg, #c2410c, #9a3412);
+  border-left: 5px solid var(--neon-orange);
+}
+.sec-potencia .section-header {
+  border-bottom: 2px solid #c2410c;
+}
+
+/* 5. Gen 4 - Celeste */
+.sec-gen4 .section-header-title {
+  background: linear-gradient(90deg, #0369a1, #0c4a6e);
+  border-left: 5px solid var(--neon-blue);
+}
+.sec-gen4 .section-header {
+  border-bottom: 2px solid #0369a1;
+}
+
+
+/* ==========================================================================
+   TARJETAS DE COMPUTADORA (PC CARDS)
+   ========================================================================== */
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 2rem;
+}
+
+/* Grid especial para 3 columnas estables en escritorio */
+@media (min-width: 1024px) {
+  .sec-gamer .cards-grid,
+  .sec-home .cards-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas para estas secciones */
+  }
+  .sec-eco .cards-grid,
+  .sec-potencia .cards-grid,
+  .sec-gen4 .cards-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+  }
+}
+
+.pc-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition-smooth);
+  position: relative;
+}
+
+.pc-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(0, 240, 255, 0.3);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.6), 0 0 20px rgba(0, 240, 255, 0.05);
+}
+
+/* Resaltado cuando queda sólo 1 unidad (Stock crítico) */
+.pc-card.highlight-last {
+  border-color: rgba(239, 68, 68, 0.25);
+}
+.pc-card.highlight-last:hover {
+  border-color: rgba(239, 68, 68, 0.6);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.6), 0 0 20px rgba(239, 68, 68, 0.1);
+}
+
+/* Badges de stock (Superior de la tarjeta) */
+.card-badge-container {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 5;
+}
+
+.stock-badge {
+  padding: 0.22rem 0.55rem;
+  border-radius: var(--border-radius-sm);
+  font-family: var(--font-family-title);
+  font-size: 0.58rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.stock-badge.urgent {
+  background: #ef4444;
+  color: #ffffff;
+  box-shadow: var(--glow-red);
+}
+
+.stock-badge.available {
+  background: var(--neon-green);
+  color: #060913;
+  box-shadow: var(--glow-green);
+}
+
+.badge-pulse {
+  width: 4px;
+  height: 4px;
+  background-color: #fff;
+  border-radius: 50%;
+  display: inline-block;
+  animation: pulse-ring 1.5s infinite;
+}
+
+/* Contenedor de Gabinete Reemplazable */
+.pc-image-container {
+  height: 220px;
+  background: radial-gradient(circle, #1e293b 0%, #0c1223 100%);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.cabinet-wrapper {
+  height: 100%;
+  width: 100%;
+  max-width: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth);
+}
+
+.pc-card:hover .cabinet-wrapper {
+  transform: scale(1.05);
+}
+
+.image-replace-note {
+  position: absolute;
+  bottom: 0.5rem;
+  font-size: 0.6rem;
+  color: #475569;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+/* Cuerpo de información */
+.pc-info {
+  padding: 1.5rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.pc-title {
+  font-family: var(--font-family-title);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 1.2rem;
+  line-height: 1.3;
+  min-height: 2.8rem;
+  display: flex;
+  align-items: center;
+}
+
+/* Lista de Especificaciones Técnicas */
+.pc-specs {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  font-size: 0.85rem;
+}
+
+.pc-specs li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  color: #cbd5e1;
+}
+
+.spec-icon {
+  flex-shrink: 0;
+  font-size: 1rem;
+  width: 1.25rem;
+  text-align: center;
+}
+
+.spec-content {
+  line-height: 1.4;
+}
+
+.spec-content strong {
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+/* Pie de tarjeta */
+.pc-footer {
+  padding: 1.5rem;
+  background: rgba(6, 9, 19, 0.4);
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.pc-pricing {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #64748b;
+  font-weight: 700;
+}
+
+.price-value {
+  font-family: var(--font-family-title);
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+}
+
+.pc-card.highlight-last .price-value {
+  color: #ff5252;
+  text-shadow: 0 0 10px rgba(255, 82, 82, 0.2);
+}
+
+.pc-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.stock-label-footer {
+  font-size: 0.75rem;
+  font-weight: 800;
+  font-family: var(--font-family-title);
+  letter-spacing: 0.5px;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+}
+
+.stock-label-footer.red {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--neon-red);
+}
+
+.stock-label-footer.green {
+  background: rgba(34, 197, 94, 0.1);
+  color: var(--neon-green);
+}
+
+/* Botón de consulta específico por equipo */
+.btn-whatsapp-card {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: #075e54;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.6rem 1rem;
+  border-radius: var(--border-radius-sm);
+  transition: var(--transition-smooth);
+  flex-grow: 1;
+  text-align: center;
+}
+
+.btn-whatsapp-card:hover {
+  background: #128c7e;
+  box-shadow: 0 5px 15px rgba(18, 140, 126, 0.3);
+  transform: translateY(-1px);
+}
+
+.btn-whatsapp-card svg {
+  fill: currentColor;
+}
+
+
+/* ==========================================================================
+   SECCIÓN DE ACCESORIOS ("Personalizá tu compra")
+   ========================================================================== */
+
+.accessories-section {
+  background: radial-gradient(ellipse at bottom, rgba(21, 30, 54, 0.5) 0%, var(--bg-main) 100%);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  padding: 3rem 2rem;
+  margin: 5rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.accessories-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--gradient-cyber);
+}
+
+.accessories-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 2.5rem;
+}
+
+.accessories-header h2 {
+  font-family: var(--font-family-title);
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #fff;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.accessories-header p {
+  color: #94a3b8;
+  font-size: 0.95rem;
+}
+
+.accessories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+.accessory-card {
+  background: rgba(12, 18, 35, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--border-radius-md);
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  transition: var(--transition-smooth);
+}
+
+.accessory-card:hover {
+  border-color: rgba(217, 70, 239, 0.3);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  transform: translateY(-2px);
+}
+
+.accessory-icon {
+  font-size: 1.5rem;
+  background: rgba(30, 41, 59, 0.5);
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radius-sm);
+  flex-shrink: 0;
+}
+
+.accessory-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  flex-grow: 1;
+}
+
+.accessory-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: transparent;
+  border: 1px solid var(--neon-purple);
+  color: #f472b6;
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  transition: var(--transition-smooth);
+}
+
+.accessory-btn:hover {
+  background: var(--neon-purple);
+  color: #fff;
+  box-shadow: var(--glow-purple);
+}
+
+/* ==========================================================================
+   SECCIÓN DE INFORMACIÓN Y PIE DE PÁGINA (GARANTÍA Y TÉRMINOS)
+   ========================================================================== */
+
+.info-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-bottom: 5rem;
+}
+
+.info-card {
+  background: #0c1223;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  padding: 2rem;
+}
+
+.info-card.important-info {
+  border-left: 4px solid var(--neon-orange);
+}
+
+.info-card.promo-info {
+  border-left: 4px solid var(--neon-cyan);
+}
+
+.info-card h3 {
+  font-family: var(--font-family-title);
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.info-card h3 svg {
+  color: var(--neon-cyan);
+}
+
+.info-card.important-info h3 { color: var(--neon-orange); }
+.info-card.promo-info h3 { color: var(--neon-cyan); }
+
+.info-card ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-size: 0.85rem;
+}
+
+.info-card li {
+  position: relative;
+  padding-left: 1.5rem;
+  color: #cbd5e1;
+}
+
+.info-card li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--neon-cyan);
+  font-weight: bold;
+}
+
+.info-card.important-info li::before {
+  content: '⚠️';
+}
+
+/* Bottom Bar / Sub-footer */
+.bottom-bar {
+  background: #020617;
+  border-top: 1px solid var(--border-color);
+  padding: 1.5rem 0;
+}
+
+.bottom-bar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.bottom-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #64748b;
+}
+
+.bottom-item svg {
+  color: var(--neon-cyan);
+}
+
+/* Footer Copyright */
+footer {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  background: #020617;
+  color: #475569;
+  font-size: 0.8rem;
+  border-top: 1px solid rgba(255,255,255,0.02);
+}
+
+footer a {
+  color: var(--neon-cyan);
+  text-decoration: none;
+}
+
+
+/* ==========================================================================
+   WHATSAPP BOTÓN FLOTANTE (Con animación)
+   ========================================================================== */
+
+#whatsapp-float {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background-color: #25d366;
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  z-index: 999;
+  transition: var(--transition-smooth);
+}
+
+#whatsapp-float:hover {
+  background-color: #128c7e;
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+}
+
+.float-wa-icon {
+  width: 32px;
+  height: 32px;
+  fill: currentColor;
+}
+
+
+/* ==========================================================================
+   ANIMACIONES MICRO-INTERACTIVAS
+   ========================================================================== */
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 8px rgba(255, 255, 255, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+}
+
+@keyframes pulse-border {
+  0% {
+    border-color: rgba(239, 68, 68, 0.4);
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.2);
+  }
+  50% {
+    border-color: rgba(239, 68, 68, 1);
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+  }
+  100% {
+    border-color: rgba(239, 68, 68, 0.4);
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.2);
+  }
+}
+
+
+/* ==========================================================================
+   MEDIA QUERIES - RESPONSIVO MÓVIL
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  header {
+    padding: 3rem 1rem 2rem;
+  }
+  
+  header h1 {
+    font-size: 2.2rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+    letter-spacing: 2px;
+  }
+  
+  .filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+    margin-top: 1rem;
+  }
+  
+  .filter-group.search {
+    max-width: 100%;
+  }
+  
+  .cards-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem;
+  }
+  
+  .accessories-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .info-cards-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .bottom-bar-inner {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  #whatsapp-float {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 50px;
+    height: 50px;
+  }
+  
+  .float-wa-icon {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+
+/* ==========================================================================
+   HOJA DE ESTILOS DE IMPRESIÓN (EXPORTABLE A PDF DESDE CHROME)
+   ========================================================================== */
+
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 11px !important;
+  }
+  
+  body::before, body::after {
+    display: none !important;
+  }
+  
+  /* Ocultar elementos innecesarios e interactivos en el PDF */
+  #whatsapp-float,
+  .filter-bar,
+  .btn-whatsapp-card,
+  .accessory-btn,
+  .image-replace-note,
+  .accessories-section,
+  footer {
+    display: none !important;
+  }
+  
+  /* Encabezado compacto */
+  header {
+    padding: 1rem 0 !important;
+    background: transparent !important;
+    border-bottom: 2px solid #000000 !important;
+    margin-bottom: 1.5rem !important;
+  }
+  
+  header h1 {
+    color: #000000 !important;
+    text-shadow: none !important;
+    font-size: 1.8rem !important;
+  }
+  
+  header h1 span.highlight {
+    background: transparent !important;
+    -webkit-text-fill-color: #000000 !important;
+    color: #000000 !important;
+  }
+  
+  .hero-subtitle {
+    color: #000000 !important;
+    font-size: 1rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  .hero-badge-stock-global {
+    border: 1.5px solid #000000 !important;
+    color: #000000 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    animation: none !important;
+    font-size: 0.8rem !important;
+    padding: 0.3rem 1rem !important;
+  }
+
+  .header-features {
+    margin-top: 1rem !important;
+    gap: 1rem !important;
+  }
+
+  .feature-item {
+    background: #f1f5f9 !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #334155 !important;
+    padding: 0.4rem 0.8rem !important;
+    font-size: 0.75rem !important;
+  }
+
+  .feature-item svg {
+    color: #000000 !important;
+    filter: none !important;
+  }
+
+  .ilustrative-note {
+    margin-top: 0.8rem !important;
+    font-size: 0.65rem !important;
+    color: #64748b !important;
+  }
+  
+  /* Optimización de cuadrícula a 3 columnas para encajar más tarjetas por página */
+  .cards-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 10px !important;
+  }
+  
+  /* Tarjetas compactas */
+  .pc-card {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+    transform: none !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    padding: 0.2cm !important;
+  }
+  
+  .pc-image-container {
+    background: #f8fafc !important;
+    height: 100px !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    padding: 0.3rem !important;
+  }
+
+  .cabinet-wrapper {
+    max-width: 70px !important;
+  }
+  
+  /* Forzar colores oscuros de líneas del SVG en impresión */
+  .pc-image-container svg rect,
+  .pc-image-container svg circle,
+  .pc-image-container svg line {
+    stroke: #1e293b !important;
+  }
+  
+  .pc-image-container svg rect[fill="#1e293b"],
+  .pc-image-container svg rect[fill="#111827"] {
+    fill: #f1f5f9 !important;
+  }
+  
+  .pc-info {
+    padding: 0.5rem !important;
+  }
+
+  .pc-title {
+    color: #000000 !important;
+    min-height: auto !important;
+    font-size: 0.85rem !important;
+    font-weight: 800 !important;
+    margin-bottom: 0.4rem !important;
+  }
+  
+  .pc-specs {
+    gap: 0.3rem !important;
+    font-size: 0.7rem !important;
+  }
+  
+  .pc-specs li {
+    color: #334155 !important;
+    gap: 0.3rem !important;
+  }
+  
+  .spec-icon {
+    font-size: 0.75rem !important;
+    width: 0.8rem !important;
+  }
+
+  .spec-content strong {
+    color: #090d16 !important;
+  }
+  
+  .pc-footer {
+    background: #f8fafc !important;
+    border-top: 1px solid #e2e8f0 !important;
+    padding: 0.5rem !important;
+    gap: 0.3rem !important;
+  }
+
+  .pc-pricing {
+    justify-content: space-between !important;
+  }
+
+  .price-label {
+    font-size: 0.65rem !important;
+  }
+  
+  .price-value {
+    color: #000000 !important;
+    font-size: 1.15rem !important;
+    text-shadow: none !important;
+  }
+
+  .pc-actions {
+    justify-content: center !important;
+  }
+
+  .stock-label-footer {
+    font-size: 0.65rem !important;
+    padding: 0.1rem 0.4rem !important;
+  }
+
+  .stock-label-footer.red {
+    background: #fee2e2 !important;
+    color: #b91c1c !important;
+  }
+
+  .stock-label-footer.green {
+    background: #dcfce7 !important;
+    color: #15803d !important;
+  }
+  
+  /* Ajustes en los encabezados de las secciones en impresión */
+  .section-header {
+    margin-bottom: 0.8rem !important;
+    margin-top: 1.5rem !important;
+    break-after: avoid !important;
+    page-break-after: avoid !important;
+  }
+
+  /* Forzar salto de página antes de las secciones 3, 4 y 5 */
+  #seccion-3,
+  #seccion-4,
+  #seccion-5 {
+    break-before: page !important;
+    page-break-before: always !important;
+  }
+
+  .section-header-title {
+    background: #e2e8f0 !important;
+    border-left: 4px solid #000000 !important;
+    color: #000000 !important;
+    padding: 0.4rem 0.8rem !important;
+  }
+  
+  .section-header h2 {
+    color: #000000 !important;
+    font-size: 1rem !important;
+  }
+  
+  .section-desc {
+    color: #475569 !important;
+    font-size: 0.75rem !important;
+  }
+
+  /* Formato compacto para las tarjetas de información inferior */
+  .info-cards-container {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+    margin-top: 2rem !important;
+    margin-bottom: 1.5rem !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .info-card {
+    padding: 0.8rem !important;
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 6px !important;
+  }
+
+  .info-card h3 {
+    font-size: 0.9rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .info-card ul {
+    gap: 0.4rem !important;
+    font-size: 0.7rem !important;
+  }
+
+  .info-card li {
+    padding-left: 1rem !important;
+  }
+
+  /* Barra inferior de calidad en PDF (Conservar EQUIPOS PROBADOS...) */
+  .bottom-bar {
+    background: #f8fafc !important;
+    border-top: 2px solid #000000 !important;
+    border-bottom: 1.5px solid #cbd5e1 !important;
+    padding: 0.8rem 0 !important;
+    margin-top: 1.5rem !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .bottom-bar-inner {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-around !important;
+    flex-wrap: nowrap !important;
+    gap: 0.5rem !important;
+  }
+
+  .bottom-item {
+    font-size: 0.65rem !important;
+    color: #0f172a !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+  }
+
+  .bottom-item svg {
+    color: #0f172a !important;
+    width: 9px !important;
+    height: 9px !important;
+  }
+  
+  /* Configuración de página A4 */
+  @page {
+    size: A4 portrait;
+    margin: 1cm 1cm 1cm 1cm;
+  }
+  
+  /* Forzar la impresión de colores de fondo en Chrome */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
