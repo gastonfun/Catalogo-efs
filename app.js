@@ -180,7 +180,7 @@ const PRODUCTOS_CATALOGO = [
     seccion: 4,
     titulo: "PC ESCRITORIO INTEL CORE i7",
     stock: 1,
-    precio: 3550000,
+    precio: 355000,
     imagen: "atx_case_gamer",
     specs: [
       { label: "Procesador", value: "Intel Core i7 2600s 2.8Ghz (Gen. 2ª)" },
