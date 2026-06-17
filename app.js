@@ -180,7 +180,7 @@ const PRODUCTOS_CATALOGO = [
     seccion: 4,
     titulo: "PC ESCRITORIO INTEL CORE i7",
     stock: 1,
-    precio: 290000,
+    precio: 3550000,
     imagen: "atx_case_gamer",
     specs: [
       { label: "Procesador", value: "Intel Core i7 2600s 2.8Ghz (Gen. 2ª)" },
@@ -188,7 +188,7 @@ const PRODUCTOS_CATALOGO = [
       { label: "Puertos y Video", value: "Conexiones USB 3.0 x2 - VGA + DVI" },
       { label: "Memoria RAM", value: "8GB DDR3 (Expandible a 16GB)" },
       { label: "Almacenamiento", value: "Disco SSD Gigabyte 120GB" },
-      { label: "Gabinete", value: "Gabinete ATX con Fuente 450W" },
+      { label: "Gabinete", value: "Gabinete ATX con Fuente 500W" },
       { label: "Periféricos", value: "Mouse y teclado Gamer retroiluminado" },
       { label: "Sistema Operativo", value: "Windows 11 Pro Incluido" }
     ]
