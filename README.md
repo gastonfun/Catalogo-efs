@@ -51,7 +51,7 @@ Luego ingresa a `http://localhost:8000` (Público) o `http://localhost:8000/admi
 Para ingresar al dashboard, utiliza las siguientes credenciales predefinidas:
 
 *   **Usuario**: `adminsasa`
-*   **Contraseña**: `mundial2026`
+*   **Contraseña**: `OCULTA POR EL DESARROLLADOR XD`
 
 ---
 
