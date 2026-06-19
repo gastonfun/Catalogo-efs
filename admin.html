@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Administrador | Ofertas del MUNDIAL</title>
+  
+  <!-- Estilos del sitio principal (incluyendo estilos del administrador) -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="admin-body">
+
+  <!-- ==========================================
+       PANTALLA DE ACCESO (LOGIN)
+       ========================================== -->
+  <div id="login-container" class="admin-login-wrapper">
+    <div class="login-card">
+      <div class="login-header">
+        <span class="lock-icon">🔒</span>
+        <h2>Acceso Administrativo</h2>
+        <p>Introduce las credenciales para gestionar el catálogo</p>
+      </div>
+      <form id="login-form">
+        <div class="form-group">
+          <label for="username">Usuario</label>
+          <input type="text" id="username" class="filter-input" placeholder="adminsasa" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Contraseña</label>
+          <input type="password" id="password" class="filter-input" placeholder="••••••••" required>
+        </div>
+        <div id="login-error-msg" class="login-error" style="display: none;">
+          Usuario o contraseña incorrectos.
+        </div>
+        <button type="submit" class="btn-admin-submit">Ingresar al Panel</button>
+      </form>
+      <div class="login-footer">
+        <a href="index.html" class="back-link">← Volver al Catálogo Público</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       PANEL DE CONTROL (DASHBOARD)
+       ========================================== -->
+  <div id="dashboard-container" class="admin-dashboard-wrapper" style="display: none;">
+    
+    <!-- Barra superior del panel -->
+    <header class="admin-header">
+      <div class="admin-header-title">
+        <h1>PANEL DE CONTROL</h1>
+        <div class="admin-subtitle">Gestión del Catálogo "Ofertas del MUNDIAL"</div>
+      </div>
+      <div class="admin-header-actions">
+        <span class="user-badge">👤 adminsasa</span>
+        <button id="btn-logout" class="btn-admin-logout">Cerrar Sesión</button>
+        <a href="index.html" target="_blank" class="btn-view-site">Ver Web Pública ↗</a>
+      </div>
+    </header>
+
+    <!-- Navegación por pestañas -->
+    <nav class="admin-tabs">
+      <button class="tab-btn active" data-tab="tab-productos">🕹️ Productos</button>
+      <button class="tab-btn" data-tab="tab-nuevo-prod" id="tab-form-trigger">➕ Nuevo Producto</button>
+      <button class="tab-btn" data-tab="tab-categorias">📁 Categorías</button>
+      <button class="tab-btn" data-tab="tab-exportar">💾 Exportar Base de Datos</button>
+    </nav>
+
+    <!-- Contenido de las pestañas -->
+    <main class="admin-tab-content">
+
+      <!-- PESTAÑA 1: LISTADO DE PRODUCTOS -->
+      <section id="tab-productos" class="tab-pane active">
+        <div class="tab-pane-header">
+          <div class="search-bar-admin">
+            <input type="text" id="admin-search-input" class="filter-input" placeholder="Buscar producto por título o spec...">
+          </div>
+          <button id="btn-reset-factory" class="btn-danger-outline">⚠️ Restablecer Datos de Fábrica</button>
+        </div>
+        
+        <div class="table-container">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Gabinete</th>
+                <th>Nombre del Producto</th>
+                <th>Categoría</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="admin-products-table-body">
+              <!-- Renderizado dinámico desde admin.js -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- PESTAÑA 2: AGREGAR / EDITAR PRODUCTO -->
+      <section id="tab-nuevo-prod" class="tab-pane">
+        <div class="form-container">
+          <h2 id="form-title">Agregar Nuevo Producto</h2>
+          <form id="product-form">
+            <input type="hidden" id="edit-product-id">
+            
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label for="prod-title">Título del Producto</label>
+                <input type="text" id="prod-title" class="filter-input" placeholder="Ej: PC ESCRITORIO INTEL CORE i5-10400" required>
+              </div>
+              <div class="form-group">
+                <label for="prod-category">Categoría (Sección)</label>
+                <select id="prod-category" class="filter-select" required>
+                  <!-- Cargado dinámicamente -->
+                </select>
+              </div>
+            </div>
+
+            <div class="form-grid-3">
+              <div class="form-group">
+                <label for="prod-price">Precio (en Pesos ARS)</label>
+                <input type="number" id="prod-price" class="filter-input" placeholder="Ej: 320000" min="0" required>
+              </div>
+              <div class="form-group">
+                <label for="prod-stock">Stock (Unidades)</label>
+                <input type="number" id="prod-stock" class="filter-input" placeholder="Ej: 3" min="0" required>
+              </div>
+              <div class="form-group">
+                <label for="prod-image">Gabinete / Imagen</label>
+                <select id="prod-image" class="filter-select">
+                  <option value="gamer_case_neon">Gabinete Gamer Neón (RGB)</option>
+                  <option value="atx_case_gamer">Gabinete Gamer ATX (3 Ventiladores)</option>
+                  <option value="slim_case_kelyx">Gabinete Slim Kelyx</option>
+                  <option value="slim_case_bangho">Gabinete Slim Bangho</option>
+                  <option value="atx_case_office">Gabinete de Oficina ATX</option>
+                  <option value="custom">Ruta de imagen personalizada (Ej. images/pc.png)...</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Campo dinámico para ruta de imagen personalizada -->
+            <div class="form-group" id="custom-image-group" style="display: none;">
+              <label for="prod-image-custom">Ruta de Imagen Personalizada (.png / .jpg)</label>
+              <input type="text" id="prod-image-custom" class="filter-input" placeholder="Ej: images/mi-gabinete-personalizado.png">
+            </div>
+
+            <!-- Sección de especificaciones técnicas -->
+            <div class="specs-form-section">
+              <h3>Especificaciones Técnicas</h3>
+              <p class="specs-desc">Introduce las etiquetas y sus detalles. Se generarán iconos automáticamente según la etiqueta (Ej. Procesador, RAM, Almacenamiento, Gráficos, Monitores, Gabinete, Sistema Operativo).</p>
+              
+              <div class="specs-inputs-grid" id="specs-inputs-container">
+                <!-- Se generarán 9 filas de especificaciones -->
+              </div>
+            </div>
+
+            <div class="form-actions-row">
+              <button type="button" id="btn-cancel-form" class="btn-cancel">Cancelar</button>
+              <button type="submit" class="btn-admin-submit">Guardar Producto</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- PESTAÑA 3: GESTIÓN DE CATEGORÍAS -->
+      <section id="tab-categorias" class="tab-pane">
+        <div class="categories-panel">
+          <div class="category-create-box">
+            <h3>Crear Nueva Categoría</h3>
+            <form id="category-form">
+              <input type="hidden" id="edit-category-id">
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label for="cat-name">Nombre de Categoría</label>
+                  <input type="text" id="cat-name" class="filter-input" placeholder="Ej: 6. LÍNEA EXTREMA" required>
+                </div>
+                <div class="form-group">
+                  <label for="cat-icon">Icono Emoji</label>
+                  <input type="text" id="cat-icon" class="filter-input" placeholder="Ej: 🚀" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="cat-desc">Descripción</label>
+                <input type="text" id="cat-desc" class="filter-input" placeholder="Ej: Equipos con la última generación tecnológica y overclocking." required>
+              </div>
+              <div class="form-group">
+                <label for="cat-class">Clase CSS (Color de borde)</label>
+                <select id="cat-class" class="filter-select">
+                  <option value="sec-gamer">Azul Gamer (Gamer)</option>
+                  <option value="sec-home">Verde Oficina (Home)</option>
+                  <option value="sec-eco">Morado Económico (Eco)</option>
+                  <option value="sec-potencia">Naranja Potencia (Gen 2)</option>
+                  <option value="sec-gen4">Celeste Gen 4 (Gen 4)</option>
+                </select>
+              </div>
+              <div class="form-actions-row" style="margin-top: 1rem;">
+                <button type="button" id="btn-cancel-cat" class="btn-cancel" style="display: none;">Cancelar Edición</button>
+                <button type="submit" class="btn-admin-submit" id="btn-save-cat">Crear Categoría</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="category-list-box">
+            <h3>Categorías Existentes</h3>
+            <div class="categories-grid-admin" id="admin-categories-list">
+              <!-- Renderizado dinámico desde admin.js -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PESTAÑA 4: EXPORTAR BASE DE DATOS -->
+      <section id="tab-exportar" class="tab-pane">
+        <div class="export-box">
+          <h2>Exportar Base de Datos para GitHub Pages</h2>
+          <p>Dado que GitHub Pages no utiliza bases de datos de servidor, tus cambios se guardan localmente en tu navegador. Para hacerlos públicos a todos tus clientes, sigue estos pasos:</p>
+          
+          <ol class="export-steps">
+            <li>Haz clic en el botón de abajo para <strong>Copiar el Código</strong>.</li>
+            <li>Abre tu archivo local <code>app.js</code> en tu editor de código.</li>
+            <li>Busca las líneas donde inicia la base de datos por defecto (<code>PRODUCTOS_CATALOGO_DEFAULT</code> y <code>CATEGORIAS_DEFAULT</code>).</li>
+            <li>Reemplaza esas secciones con el código copiado.</li>
+            <li>Guarda el archivo y haz un <code>git commit</code> y <code>git push</code> a tu repositorio de GitHub.</li>
+          </ol>
+
+          <div class="export-actions">
+            <button id="btn-export-code" class="btn-admin-submit">📋 Copiar Base de Datos de Productos</button>
+            <button id="btn-export-cats" class="btn-admin-submit" style="background-color: var(--neon-purple); border-color: var(--neon-purple);">📋 Copiar Base de Datos de Categorías</button>
+          </div>
+
+          <div class="code-preview-container">
+            <label>Vista Previa del Código:</label>
+            <textarea id="code-output" class="code-textarea" readonly placeholder="El código aparecerá aquí..."></textarea>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

@@ -1,6 +1,6 @@
 # Catálogo Digital "Ofertas del MUNDIAL" 🏆💻
 
-Este proyecto consiste en un **landing-catalog premium** diseñado con una estética moderna de retail tecnológico ("Cyberpunk Retail") con acentos de neón azul, cian y morado. Cuenta con interactividad completa en tiempo real y una hoja de estilos de impresión sumamente optimizada para exportar el catálogo a formato **PDF A4** desde Google Chrome.
+Este proyecto consiste en un **landing-catalog premium** diseñado con una estética moderna de retail tecnológico ("Cyberpunk Retail") con acentos de neón azul, cian y morado. Cuenta con interactividad completa en tiempo real, una hoja de estilos de impresión sumamente optimizada para exportar el catálogo a formato **PDF A4** y un **Dashboard de Administración** para gestionar productos y categorías de forma dinámica sin base de datos en servidor.
 
 ---
 
@@ -8,24 +8,25 @@ Este proyecto consiste en un **landing-catalog premium** diseñado con una esté
 
 El desarrollo es 100% nativo (Vanilla HTML/CSS/JS) y se compone de los siguientes archivos en la raíz del espacio de trabajo:
 
-*   **[`index.html`](index.html)**: Estructura semántica del catálogo. Incluye metatags SEO, secciones del folleto (1 a 5), cuadrícula interactiva de accesorios y pie de página comercial.
-*   **[`style.css`](style.css)**: Estilos CSS organizados mediante variables. Define el tema oscuro, los efectos de resplandor de neón, las micro-animaciones (badges que pulsan) y las reglas de diseño responsivo y de impresión (`@media print`).
-*   **[`app.js`](app.js)**: Base de datos estructurada con 13 configuraciones de computadoras transcritas fielmente de la maqueta, motor de renderizado dinámico, buscador y filtros en tiempo real, y generador dinámico de enlaces de consulta por WhatsApp.
+*   **[`index.html`](index.html)**: Estructura semántica del catálogo. Incluye metatags SEO, secciones dinámicas de productos, cuadrícula de accesorios y pie de página comercial.
+*   **[`admin.html`](admin.html)**: Interfaz del panel de control de administración. Cuenta con pantalla de acceso de login y formularios para gestionar categorías y computadoras.
+*   **[`style.css`](style.css)**: Estilos CSS organizados mediante variables. Define el tema oscuro, los efectos de neón, el responsivo móvil, la diagramación del panel administrativo y las reglas de PDF (`@media print`).
+*   **[`app.js`](app.js)**: Motor público del catálogo. Carga dinámicamente las PCs y categorías desde `localStorage` (o fallback inicial), maneja filtros y genera enlaces de WhatsApp.
+*   **[`admin.js`](admin.js)**: Lógica interna del administrador. Valida las credenciales, maneja las operaciones CRUD locales, genera plantillas de especificaciones técnicas y expone el exportador de base de datos.
 
 ---
 
 ## ✨ Características Principales
 
 1.  **Estilo Gamer Tech**: Fondo oscuro de alto contraste y bordes luminosos neón.
-2.  **Transcripción Fiel**: Contiene las 13 computadoras organizadas en sus 5 secciones originales con especificaciones exactas e iconos vectoriales explicativos.
-3.  **Filtros Interactivos**: Buscador dinámico por texto (permite buscar por procesador, RAM o placa de video) y filtro por categoría para ubicar modelos específicos al instante.
-4.  **Consulta Directa por WhatsApp**: Cada equipo y accesorio incluye un botón que abre un chat con un mensaje personalizado detallando el modelo exacto y su precio de oferta.
-5.  **WhatsApp Flotante**: Botón interactivo global en la parte inferior derecha que permite realizar consultas generales.
-6.  **Optimización PDF (Chrome)**:
-    *   Oculta de forma automática los botones de consulta web, filtros y banners flotantes.
-    *   Reorganiza el diseño en una cuadrícula compacta de **3 columnas** con fuentes más pequeñas para optimizar espacio.
-    *   Fuerza saltos de página inteligentes para iniciar las secciones **3, 4 y 5 al tope de una nueva página**.
-    *   Conserva y centra la barra inferior comercial de calidad como pie de página formal en el PDF.
+2.  **Dashboard Administrativo**: Panel protegido por contraseña para crear, editar y borrar productos o categorías en tiempo real.
+3.  **Categorías Editables**: Las categorías se pueden agregar, renombrar, cambiar de color neón o eliminar por completo desde la administración.
+4.  **Mensajes Dinámicos**: Los botones de WhatsApp de la web se configuran automáticamente con el nombre de la PC seleccionada, su procesador y precio actual.
+5.  **Optimización PDF (Chrome)**:
+    *   Oculta los botones interactivos, filtros y WhatsApp flotante.
+    *   Formatea el listado en una grilla compacta de **3 columnas** con fuentes reducidas.
+    *   Aplica saltos de página inteligentes de forma dinámica (las secciones a partir de la 3ª inician al tope de una nueva página).
+    *   Centra la barra de sellos comerciales (`EQUIPOS PROBADOS | COMPONENTES DE CALIDAD...`) como pie de página formal en el PDF.
 
 ---
 
@@ -34,45 +35,38 @@ El desarrollo es 100% nativo (Vanilla HTML/CSS/JS) y se compone de los siguiente
 Puedes abrir y probar la aplicación inmediatamente de dos maneras:
 
 ### 1. Apertura Directa (Navegador)
-Haz doble clic sobre el archivo `index.html` en tu explorador de archivos para abrirlo en tu navegador favorito de forma local.
+Haz doble clic sobre el archivo `index.html` en tu explorador de archivos para abrirlo en tu navegador favorito. Para acceder al panel de administración, haz clic en el enlace "Administración" del footer o abre `admin.html`.
 
 ### 2. Servidor Local (Recomendado)
-Para emular un entorno de red real, abre tu terminal en el directorio del proyecto y ejecuta:
+Para simular el entorno de red de GitHub Pages de forma local, ejecuta:
 ```powershell
 npx http-server . -p 8000
 ```
-Luego ingresa a `http://localhost:8000` en tu navegador.
+Luego ingresa a `http://localhost:8000` (Público) o `http://localhost:8000/admin.html` (Administración).
 
 ---
 
-## 🎨 Guía de Personalización
+## 🔑 Acceso al Panel de Administración
 
-### Reemplazo de Gabinetes e Imágenes
-Cada tarjeta cuenta con un gabinete vectorial interactivo renderizado por SVG. Para usar fotos reales (PNG/JPG):
-1.  Guarda tus archivos de imagen en una carpeta (ej. `/images/`).
-2.  Abre [`app.js`](app.js) y busca el array `PRODUCTOS_CATALOGO`.
-3.  Reemplaza el valor de la propiedad `imagen` por la ruta de tu archivo:
-    ```javascript
-    // Ejemplo de cambio:
-    imagen: "images/gabinete-gamer-ultra.png",
-    ```
-    *El sistema detectará automáticamente la extensión del archivo y reemplazará el SVG por una etiqueta `<img>` perfectamente escalada.*
+Para ingresar al dashboard, utiliza las siguientes credenciales predefinidas:
 
-### Ajuste de Teléfono de WhatsApp
-Para redirigir las consultas de compra al número de tu comercio, abre [`app.js`](app.js) y modifica el número telefónico en la parte superior:
-```javascript
-const WHATSAPP_PHONE = "5491123456789"; // Ingresa el código de país y de área sin espacios ni guiones
-```
+*   **Usuario**: `adminsasa`
+*   **Contraseña**: `mundial2026`
 
 ---
 
-## 🖨️ Instrucciones de Exportación a PDF
+## 🛠️ Gestión de Datos y Publicación en GitHub Pages
 
-1.  Abre el sitio web en **Google Chrome**.
-2.  Presiona **Ctrl + P** (Imprimir).
-3.  Selecciona como destino **Guardar como PDF**.
-4.  En la configuración avanzada:
-    *   Elige tamaño de papel **A4**.
-    *   Configura los márgenes como **Predeterminado**.
-    *   **IMPORTANTE**: Asegúrate de **activar la casilla "Gráficos de fondo"** en las opciones de Chrome para que los colores de neón, cajas y headers se exporten correctamente.
-5.  Haz clic en **Guardar**.
+Dado que la aplicación se aloja de forma estática y gratuita en GitHub Pages (sin bases de datos SQL/NoSQL en servidor), los cambios que guardas en el panel de administración se almacenan **únicamente en el almacenamiento local de tu navegador (`localStorage`)**.
+
+Para publicar tus cambios de manera que **todos los clientes de Internet** puedan ver las nuevas PCs, precios y categorías, sigue estos sencillos pasos:
+
+1.  Realiza todas tus modificaciones (añadir productos, cambiar precios, renombrar categorías) en tu panel administrativo (`admin.html`).
+2.  Ve a la pestaña **"Exportar Base de Datos"** dentro del Dashboard.
+3.  Haz clic en **"📋 Copiar Base de Datos de Productos"**.
+4.  Abre el archivo `app.js` en tu editor de código, busca el array `PRODUCTOS_CATALOGO_DEFAULT` y reemplaza todo su contenido pegando el código copiado.
+5.  Haz lo mismo haciendo clic en **"📋 Copiar Base de Datos de Categorías"** y reemplazando `CATEGORIAS_DEFAULT` en `app.js`.
+6.  Guarda el archivo `app.js`, realiza un `git commit` y un `git push` a tu repositorio de GitHub Pages.
+7.  *¡Listo! Tu catálogo en línea estará permanentemente actualizado para todo el mundo.*
+
+*Nota: Si cometes algún error en las cargas o deseas regresar a la configuración original, puedes hacer clic en **"⚠️ Restablecer Datos de Fábrica"** en el panel de administración.*

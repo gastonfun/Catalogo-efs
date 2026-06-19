@@ -1,13 +1,60 @@
 /**
  * CATALOGO OFERTAS DEL MUNDIAL - JAVASCRIPT LOGIC
  * Contiene la base de datos de las computadoras, accesorios y lógica interactiva.
+ * Ahora adaptado para cargar y guardar en localStorage (persistencia del Dashboard).
  */
 
 // Teléfono de contacto para WhatsApp 
 const WHATSAPP_PHONE = "5491151051596";
 
-// Catálogo de Computadoras 
-const PRODUCTOS_CATALOGO = [
+// Base de Datos por defecto de Categorías (seccion)
+const CATEGORIAS_DEFAULT = [
+  {
+    id: 1,
+    titulo: "1. LÍNEA GAMER Y ALTO RENDIMIENTO",
+    icon: "🎮",
+    class: "sec-gamer",
+    desc: "Equipos optimizados para videojuegos avanzados, streaming y procesamiento de alto rendimiento."
+  },
+  {
+    id: 2,
+    titulo: "2. HOGAR, ESTUDIO Y OFICINA",
+    icon: "🏠",
+    class: "sec-home",
+    desc: "Excelente rendimiento para tareas diarias de oficina, navegación web y estudio escolar/universitario."
+  },
+  {
+    id: 3,
+    titulo: "3. OPCIONES ECONÓMICAS - GENERACIÓN 2 Y 3",
+    icon: "📈",
+    class: "sec-eco",
+    desc: "PCs reacondicionadas y garantizadas, ideales para presupuestos ajustados con el mejor costo-beneficio."
+  },
+  {
+    id: 4,
+    titulo: "4. MÁS POTENCIA, MÁS POSIBILIDADES - GENERACIÓN 2",
+    icon: "⚡",
+    class: "sec-potencia",
+    desc: "Procesadores de alta gama de 2da generación para maximizar la multitarea y el rendimiento del día a día."
+  },
+  {
+    id: 5,
+    titulo: "5. GEN 4 - RENDIMIENTO CONFIABLE",
+    icon: "⚙️",
+    class: "sec-gen4",
+    desc: "Plataformas de 4ta generación Intel Core i5 estables, duraderas y preparadas para oficina o comercio."
+  },
+  {
+    "id": 6,
+    "titulo": "6. LINEA EXTREMA",
+    "icon": "🔥",
+    "class": "sec-gamer",
+    "desc": "Equipos de ultima generación Potentes"
+  }
+];
+
+// Base de Datos por defecto de Computadoras
+const PRODUCTOS_CATALOGO_DEFAULT = [
   // --- SECCIÓN 1: LÍNEA GAMER Y ALTO RENDIMIENTO ---
   {
     id: "pc-gamer-apu-a8",
@@ -15,7 +62,7 @@ const PRODUCTOS_CATALOGO = [
     titulo: "PC ESCRITORIO GAMER AMD APU A8 9600",
     stock: 1, // 1 Unidad -> Muestra "¡ÚLTIMA UNIDAD!"
     precio: 329000,
-    imagen: "gamer_case_neon", // ID para renderizado de gabinete dinámico
+    imagen: "gamer_case_neon", // ID para renderizado de gabinete dinámico o ruta de imagen
     specs: [
       { label: "Procesador", value: "AMD APU A8 9600 (Gen. 7ª)" },
       { label: "Memoria RAM", value: "8GB DDR4 (Expandible a 32GB)" },
@@ -269,7 +316,21 @@ const PRODUCTOS_CATALOGO = [
   }
 ];
 
-// Accesorios de personalización
+// Cargar catálogo de localStorage o crearlo por primera vez
+let PRODUCTOS_CATALOGO = JSON.parse(localStorage.getItem("catalogo_pcs"));
+if (!PRODUCTOS_CATALOGO) {
+  PRODUCTOS_CATALOGO = PRODUCTOS_CATALOGO_DEFAULT;
+  localStorage.setItem("catalogo_pcs", JSON.stringify(PRODUCTOS_CATALOGO));
+}
+
+// Cargar categorías de localStorage o crearlas por primera vez
+let CATEGORIAS = JSON.parse(localStorage.getItem("catalogo_categorias"));
+if (!CATEGORIAS) {
+  CATEGORIAS = CATEGORIAS_DEFAULT;
+  localStorage.setItem("catalogo_categorias", JSON.stringify(CATEGORIAS));
+}
+
+// Accesorios de personalización (estáticos)
 const ACCESORIOS = [
   { id: "monitores", nombre: "Monitores LED", icon: "📺" },
   { id: "gabinetes", nombre: "Gabinetes Gamer y Oficina", icon: "🕹️" },
@@ -436,12 +497,14 @@ function generateWhatsAppUrl(producto, accesorioNombre = null) {
   if (accesorioNombre) {
     text = `Hola! Vi las Ofertas del MUNDIAL. Me interesa el accesorio "${accesorioNombre}" para agregar a mi compra. ¿Me darías más información?`;
   } else {
-    text = `Hola! Vi las Ofertas del MUNDIAL. Me interesa el equipo: "${producto.titulo}" con procesador ${producto.specs[0].value} por un valor de ${formatPrice(producto.precio)}. ¿Tienen disponibilidad?`;
+    // Si no tiene specs en el array, evitamos undefined
+    const procSpec = (producto.specs && producto.specs.length > 0) ? producto.specs[0].value : "por defecto";
+    text = `Hola! Vi las Ofertas del MUNDIAL. Me interesa el equipo: "${producto.titulo}" con procesador ${procSpec} por un valor de ${formatPrice(producto.precio)}. ¿Tienen disponibilidad?`;
   }
   return `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(text)}`;
 }
 
-// Renderizar la grilla de productos agrupados por secciones
+// Renderizar la grilla de productos agrupados por secciones dinamicas
 function renderCatalog() {
   const container = document.getElementById("catalog-sections-container");
   if (!container) return;
@@ -449,60 +512,27 @@ function renderCatalog() {
   // Limpiamos el contenedor
   container.innerHTML = "";
 
-  // Agrupar por sección
-  const seccionesInfo = {
-    1: {
-      titulo: "1. LÍNEA GAMER Y ALTO RENDIMIENTO",
-      icon: "🎮",
-      class: "sec-gamer",
-      desc: "Equipos optimizados para videojuegos avanzados, streaming y procesamiento de alto rendimiento."
-    },
-    2: {
-      titulo: "2. HOGAR, ESTUDIO Y OFICINA",
-      icon: "🏠",
-      class: "sec-home",
-      desc: "Excelente rendimiento para tareas diarias de oficina, navegación web y estudio escolar/universitario."
-    },
-    3: {
-      titulo: "3. OPCIONES ECONÓMICAS - GENERACIÓN 2 Y 3",
-      icon: "📈",
-      class: "sec-eco",
-      desc: "PCs reacondicionadas y garantizadas, ideales para presupuestos ajustados con el mejor costo-beneficio."
-    },
-    4: {
-      titulo: "4. MÁS POTENCIA, MÁS POSIBILIDADES - GENERACIÓN 2",
-      icon: "⚡",
-      class: "sec-potencia",
-      desc: "Procesadores de alta gama de 2da generación para maximizar la multitarea y el rendimiento del día a día."
-    },
-    5: {
-      titulo: "5. GEN 4 - RENDIMIENTO CONFIABLE",
-      icon: "⚙️",
-      class: "sec-gen4",
-      desc: "Plataformas de 4ta generación Intel Core i5 estables, duraderas y preparadas para oficina o comercio."
-    }
-  };
+  // Iterar sobre las categorías configuradas
+  CATEGORIAS.forEach(info => {
+    // Filtrar productos que correspondan a esta categoría
+    // Usamos doble igual para soportar comparación de strings vs enteros
+    const productosDeSeccion = PRODUCTOS_CATALOGO.filter(p => p.seccion == info.id);
 
-  // Iterar sobre las 5 secciones
-  for (let s = 1; s <= 5; s++) {
-    const info = seccionesInfo[s];
-    const productosDeSeccion = PRODUCTOS_CATALOGO.filter(p => p.seccion === s);
-
-    if (productosDeSeccion.length === 0) continue;
+    if (productosDeSeccion.length === 0) return;
 
     // Crear elemento de sección
     const sectionElement = document.createElement("section");
-    sectionElement.className = `catalog-section ${info.class}`;
-    sectionElement.id = `seccion-${s}`;
+    sectionElement.className = `catalog-section ${info.class || 'sec-gen4'}`;
+    sectionElement.id = `seccion-${info.id}`;
 
     // Header de la sección (idéntico en color y estructura al original)
     sectionElement.innerHTML = `
       <div class="section-header">
         <div class="section-header-title">
-          <span class="section-icon">${info.icon}</span>
+          <span class="section-icon">${info.icon || '💻'}</span>
           <h2>${info.titulo}</h2>
         </div>
-        <p class="section-desc">${info.desc}</p>
+        <p class="section-desc">${info.desc || ''}</p>
       </div>
       <div class="cards-grid"></div>
     `;
@@ -619,7 +649,7 @@ function renderCatalog() {
     });
 
     container.appendChild(sectionElement);
-  }
+  });
 }
 
 // Renderizar la sección de accesorios en el panel de personalización
@@ -657,6 +687,12 @@ function setupFilters() {
 
   if (!searchInput || !filterSection) return;
 
+  // Llenar select dinámicamente según categorías guardadas
+  filterSection.innerHTML = `
+    <option value="all">Todas las Categorías</option>
+    ${CATEGORIAS.map(cat => `<option value="${cat.id}">${cat.titulo}</option>`).join("")}
+  `;
+
   const handleFilter = () => {
     const query = searchInput.value.toLowerCase().trim();
     const sectionVal = filterSection.value;
@@ -681,9 +717,9 @@ function setupFilters() {
     });
 
     // Ocultar cabeceras de sección enteras si no tienen tarjetas visibles
-    for (let s = 1; s <= 5; s++) {
-      const sectionEl = document.getElementById(`seccion-${s}`);
-      if (!sectionEl) continue;
+    CATEGORIAS.forEach(info => {
+      const sectionEl = document.getElementById(`seccion-${info.id}`);
+      if (!sectionEl) return;
 
       const cards = sectionEl.querySelectorAll(".pc-card");
       let hasVisibleCard = false;
@@ -698,7 +734,7 @@ function setupFilters() {
       } else {
         sectionEl.style.display = "none";
       }
-    }
+    });
   };
 
   searchInput.addEventListener("input", handleFilter);
