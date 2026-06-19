@@ -120,7 +120,7 @@ const PRODUCTOS_CATALOGO_DEFAULT = [
     seccion: 2,
     titulo: "PC ESCRITORIO INTEL CORE i3-9100",
     stock: 1,
-    precio: 319000,
+    precio: 339000,
     imagen: "slim_case_bangho",
     specs: [
       { label: "Procesador", value: "Intel Core i3 9100 (Gen. 9ª)" },
@@ -138,7 +138,7 @@ const PRODUCTOS_CATALOGO_DEFAULT = [
     seccion: 2,
     titulo: "PC ESCRITORIO INTEL CORE i5",
     stock: 6, // 6 Unidades -> Stock Disponible
-    precio: 170000,
+    precio: 180000,
     imagen: "atx_case_office",
     specs: [
       { label: "Procesador", value: "Intel Core i5 3330 (Gen. 3ª)" },
@@ -174,7 +174,7 @@ const PRODUCTOS_CATALOGO_DEFAULT = [
     seccion: 3,
     titulo: "PC ESCRITORIO INTEL CORE i3",
     stock: 2,
-    precio: 180000,
+    precio: 160000,
     imagen: "atx_case_gamer",
     specs: [
       { label: "Procesador", value: "Intel Core i3 2100 3.1Ghz (Gen. 2ª)" },
@@ -210,7 +210,7 @@ const PRODUCTOS_CATALOGO_DEFAULT = [
     seccion: 4,
     titulo: "PC ESCRITORIO INTEL CORE i5",
     stock: 1,
-    precio: 250000,
+    precio: 240000,
     imagen: "atx_case_gamer",
     specs: [
       { label: "Procesador", value: "Intel Core i5 2310 2.9Ghz (Gen. 2ª)" },
@@ -227,7 +227,7 @@ const PRODUCTOS_CATALOGO_DEFAULT = [
     seccion: 4,
     titulo: "PC ESCRITORIO INTEL CORE i7",
     stock: 1,
-    precio: 290000,
+    precio: 355000,
     imagen: "atx_case_gamer",
     specs: [
       { label: "Procesador", value: "Intel Core i7 2600s 2.8Ghz (Gen. 2ª)" },
@@ -235,7 +235,7 @@ const PRODUCTOS_CATALOGO_DEFAULT = [
       { label: "Puertos y Video", value: "Conexiones USB 3.0 x2 - VGA + DVI" },
       { label: "Memoria RAM", value: "8GB DDR3 (Expandible a 16GB)" },
       { label: "Almacenamiento", value: "Disco SSD Gigabyte 120GB" },
-      { label: "Gabinete", value: "Gabinete ATX con Fuente 450W" },
+      { label: "Gabinete", value: "Gabinete ATX con Fuente 500W" },
       { label: "Periféricos", value: "Mouse y teclado Gamer retroiluminado" },
       { label: "Sistema Operativo", value: "Windows 11 Pro Incluido" }
     ]
@@ -245,7 +245,7 @@ const PRODUCTOS_CATALOGO_DEFAULT = [
     seccion: 4,
     titulo: "PC ESCRITORIO INTEL CORE i3",
     stock: 1,
-    precio: 250000,
+    precio: 230000,
     imagen: "atx_case_gamer",
     specs: [
       { label: "Procesador", value: "Intel Core i3 2100 3.1Ghz (Gen. 2ª)" },
@@ -615,7 +615,7 @@ function renderCatalog() {
             ${cabinetHtml}
           </div>
           <!-- Nota sutil para cambiar imagen fácilmente -->
-          <div class="image-replace-note">Reemplazable por imagen real (SVG/PNG)</div>
+          <div class="image-replace-note">Imagen ilustrativa(SVG)</div>
         </div>
         
         <!-- Cuerpo de Información -->
