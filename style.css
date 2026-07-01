@@ -169,6 +169,7 @@ header h1 {
 header h1 span.highlight {
   background: var(--gradient-cyber);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
   position: relative;
