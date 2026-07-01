@@ -72,9 +72,9 @@ async function hashStr(str) {
 // GESTIÓN DE SESIÓN CON TOKEN HMAC-SHA256
 // ==========================================
 // Clave interna de sesión — imposible de adivinar desde DevTools
-const SESSION_TOKEN_KEY  = "adm_tk";
-const SESSION_NONCE_KEY  = "adm_nc";
-const SESSION_TS_KEY     = "adm_ts";
+const SESSION_TOKEN_KEY = "adm_tk";
+const SESSION_NONCE_KEY = "adm_nc";
+const SESSION_TS_KEY = "adm_ts";
 const SESSION_MAX_AGE_MS = 8 * 60 * 60 * 1000; // 8 horas
 
 // Importa ADMIN_PASS_HASH como clave HMAC (usado para firmar/verificar)
@@ -97,10 +97,10 @@ function _hexToBytes(hex) {
 async function generateSessionToken() {
   // Nonce aleatorio de 128 bits
   const nonceBytes = crypto.getRandomValues(new Uint8Array(16));
-  const nonce      = Array.from(nonceBytes).map(b => b.toString(16).padStart(2, "0")).join("");
-  const timestamp  = Date.now().toString();
+  const nonce = Array.from(nonceBytes).map(b => b.toString(16).padStart(2, "0")).join("");
+  const timestamp = Date.now().toString();
 
-  const key       = await _getHmacKey("sign");
+  const key = await _getHmacKey("sign");
   const sigBuffer = await crypto.subtle.sign(
     "HMAC",
     key,
@@ -110,13 +110,13 @@ async function generateSessionToken() {
 
   sessionStorage.setItem(SESSION_TOKEN_KEY, token);
   sessionStorage.setItem(SESSION_NONCE_KEY, nonce);
-  sessionStorage.setItem(SESSION_TS_KEY,    timestamp);
+  sessionStorage.setItem(SESSION_TS_KEY, timestamp);
 }
 
 // Verifica que el token almacenado sea válido y no haya expirado
 async function verifySessionToken() {
-  const token     = sessionStorage.getItem(SESSION_TOKEN_KEY);
-  const nonce     = sessionStorage.getItem(SESSION_NONCE_KEY);
+  const token = sessionStorage.getItem(SESSION_TOKEN_KEY);
+  const nonce = sessionStorage.getItem(SESSION_NONCE_KEY);
   const timestamp = sessionStorage.getItem(SESSION_TS_KEY);
 
   // Si falta cualquier parte del token → no autenticado
@@ -126,7 +126,7 @@ async function verifySessionToken() {
   if (Date.now() - parseInt(timestamp, 10) > SESSION_MAX_AGE_MS) return false;
 
   try {
-    const key     = await _getHmacKey("verify");
+    const key = await _getHmacKey("verify");
     const isValid = await crypto.subtle.verify(
       "HMAC",
       key,
@@ -282,7 +282,7 @@ function renderProductsTable() {
     }
 
     const catName = catDict[p.seccion] || `Sección ${p.seccion} (Eliminada)`;
-    
+
     // Formatear precio para la tabla
     const precioFormat = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS', maximumFractionDigits: 0 }).format(p.precio);
 
@@ -427,11 +427,61 @@ function setupFormListeners() {
   const btnExportCats = document.getElementById("btn-export-cats");
   const codeOutput = document.getElementById("code-output");
 
+  // Formatea el array de productos con el estilo compacto de app.js:
+  // claves sin comillas, cada spec en una sola línea.
+  function formatProductsCode(prods) {
+    const indent = "  ";
+    const lines = ["const PRODUCTOS_CATALOGO_DEFAULT = ["];
+
+    prods.forEach((p, i) => {
+      const trailing = i < prods.length - 1 ? "," : "";
+      lines.push(`${indent}{`);
+      lines.push(`${indent}  id: ${JSON.stringify(p.id)},`);
+      lines.push(`${indent}  seccion: ${p.seccion},`);
+      lines.push(`${indent}  titulo: ${JSON.stringify(p.titulo)},`);
+      lines.push(`${indent}  stock: ${p.stock},`);
+      lines.push(`${indent}  precio: ${p.precio},`);
+      lines.push(`${indent}  imagen: ${JSON.stringify(p.imagen)},`);
+      lines.push(`${indent}  specs: [`);
+
+      (p.specs || []).forEach((spec, si) => {
+        const sc = si < p.specs.length - 1 ? "," : "";
+        lines.push(`${indent}    { label: ${JSON.stringify(spec.label)}, value: ${JSON.stringify(spec.value)} }${sc}`);
+      });
+
+      lines.push(`${indent}  ]`);
+      lines.push(`${indent}}${trailing}`);
+    });
+
+    lines.push("];");
+    return lines.join("\n");
+  }
+
+  // Formatea el array de categorías con el mismo estilo compacto.
+  function formatCategoriasCode(cats) {
+    const indent = "  ";
+    const lines = ["const CATEGORIAS_DEFAULT = ["];
+
+    cats.forEach((c, i) => {
+      const trailing = i < cats.length - 1 ? "," : "";
+      lines.push(`${indent}{`);
+      lines.push(`${indent}  id: ${c.id},`);
+      lines.push(`${indent}  titulo: ${JSON.stringify(c.titulo)},`);
+      lines.push(`${indent}  icon: ${JSON.stringify(c.icon)},`);
+      lines.push(`${indent}  class: ${JSON.stringify(c.class)},`);
+      lines.push(`${indent}  desc: ${JSON.stringify(c.desc)}`);
+      lines.push(`${indent}}${trailing}`);
+    });
+
+    lines.push("];");
+    return lines.join("\n");
+  }
+
   if (btnExportCode && codeOutput) {
     btnExportCode.addEventListener("click", () => {
-      const code = `const PRODUCTOS_CATALOGO_DEFAULT = ${JSON.stringify(productos, null, 2)};`;
+      const code = formatProductsCode(productos);
       codeOutput.value = code;
-      
+
       // Copiar al portapapeles
       navigator.clipboard.writeText(code).then(() => {
         alert("¡Base de datos de productos copiada al portapapeles! Reemplaza el array PRODUCTOS_CATALOGO_DEFAULT en tu archivo app.js.");
@@ -443,7 +493,7 @@ function setupFormListeners() {
 
   if (btnExportCats && codeOutput) {
     btnExportCats.addEventListener("click", () => {
-      const code = `const CATEGORIAS_DEFAULT = ${JSON.stringify(categorias, null, 2)};`;
+      const code = formatCategoriasCode(categorias);
       codeOutput.value = code;
 
       // Copiar al portapapeles
@@ -466,7 +516,7 @@ function setupFormListeners() {
       const category = parseInt(document.getElementById("prod-category").value);
       const price = parseFloat(document.getElementById("prod-price").value);
       const stock = parseInt(document.getElementById("prod-stock").value);
-      
+
       let imageVal = document.getElementById("prod-image").value;
       if (imageVal === "custom") {
         imageVal = document.getElementById("prod-image-custom").value.trim();
@@ -532,13 +582,13 @@ function resetProductForm() {
   document.getElementById("form-title").textContent = "Agregar Nuevo Producto";
   document.getElementById("custom-image-group").style.display = "none";
   document.getElementById("prod-image-custom").removeAttribute("required");
-  
+
   // Resetear las especificaciones a las etiquetas por defecto
   renderSpecsInputs();
 }
 
 // Iniciar modo edición para un producto
-window.editProduct = function(id) {
+window.editProduct = function (id) {
   const p = productos.find(prod => prod.id === id);
   if (!p) return;
 
@@ -554,9 +604,9 @@ window.editProduct = function(id) {
   const customGroup = document.getElementById("custom-image-group");
   const customInput = document.getElementById("prod-image-custom");
 
-  if (p.imagen === "gamer_case_neon" || p.imagen === "atx_case_gamer" || 
-      p.imagen === "slim_case_kelyx" || p.imagen === "slim_case_bangho" || 
-      p.imagen === "atx_case_office") {
+  if (p.imagen === "gamer_case_neon" || p.imagen === "atx_case_gamer" ||
+    p.imagen === "slim_case_kelyx" || p.imagen === "slim_case_bangho" ||
+    p.imagen === "atx_case_office") {
     imgSelect.value = p.imagen;
     customGroup.style.display = "none";
     customInput.removeAttribute("required");
@@ -579,7 +629,7 @@ window.editProduct = function(id) {
 };
 
 // Eliminar un producto
-window.deleteProduct = function(id) {
+window.deleteProduct = function (id) {
   if (confirm("¿Estás seguro de que deseas eliminar este producto del catálogo?")) {
     productos = productos.filter(p => p.id !== id);
     localStorage.setItem("catalogo_pcs", JSON.stringify(productos));
@@ -608,7 +658,7 @@ function renderCategoriesList() {
   categorias.forEach(cat => {
     const item = document.createElement("div");
     item.className = `category-item-admin border-${cat.class.replace('sec-', '')}`;
-    
+
     // Contar cuántos productos tiene esta categoría
     const count = productos.filter(p => p.seccion == cat.id).length;
 
@@ -679,7 +729,7 @@ if (categoryForm) {
 }
 
 // Iniciar edición de categoría
-window.editCategory = function(id) {
+window.editCategory = function (id) {
   const cat = categorias.find(c => c.id == id);
   if (!cat) return;
 
@@ -709,9 +759,9 @@ function resetCategoryForm() {
 }
 
 // Eliminar categoría
-window.deleteCategory = function(id) {
+window.deleteCategory = function (id) {
   const hasProducts = productos.some(p => p.seccion == id);
-  
+
   let confirmMsg = "¿Estás seguro de que deseas eliminar esta categoría?";
   if (hasProducts) {
     confirmMsg = "⚠️ ¡ATENCIÓN! Esta categoría contiene computadoras asignadas. Si la eliminas, las PCs seguirán existiendo pero no se mostrarán en la web pública hasta que les asignes otra categoría. ¿Deseas continuar?";
@@ -720,7 +770,7 @@ window.deleteCategory = function(id) {
   if (confirm(confirmMsg)) {
     categorias = categorias.filter(c => c.id != id);
     localStorage.setItem("catalogo_categorias", JSON.stringify(categorias));
-    
+
     renderCategoriesList();
     renderCategoriesSelect();
     renderProductsTable();
