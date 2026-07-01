@@ -76,49 +76,22 @@ const PRODUCTOS_CATALOGO_DEFAULT = [
     ]
   },
   {
-    "id": "pc-1781834562557",
-    "seccion": 1,
-    "titulo": "PC ESCRITORIO AMD Ryzen 5 4650G PRO",
-    "stock": 1,
-    "precio": 620000,
-    "imagen": "atx_case_gamer",
-    "specs": [
-      {
-        "label": "Procesador",
-        "value": "AMD Ryzen 5 4650G 3.7Ghz < 4.2Ghz / ASUS Prime A320M-K"
-      },
-      {
-        "label": "Memoria RAM",
-        "value": "16GB DDR4 3200Mhz Aimerican Heatsink (Nuevo)"
-      },
-      {
-        "label": "Almacenamiento",
-        "value": "480GB M2. NVME Forza (Nuevo)"
-      },
-      {
-        "label": "Gráficos",
-        "value": "AMD Radeon Graphics (Vega 7)"
-      },
-      {
-        "label": "Monitores",
-        "value": "Opcional"
-      },
-      {
-        "label": "Puertos y WiFi",
-        "value": "HDMI / VGA -  Sonido 5.1 / 4 USB 3.0 + 2 USB 2.0"
-      },
-      {
-        "label": "Gabinete",
-        "value": "Standard USADO + Fuente GOLDENFIELD 600W"
-      },
-      {
-        "label": "Periféricos",
-        "value": "Mouse y teclado USB"
-      },
-      {
-        "label": "Sistema Operativo",
-        "value": "A elección"
-      }
+    id: "pc-1781834562557",
+    seccion: 1,
+    titulo: "PC ESCRITORIO AMD Ryzen 5 4650G PRO",
+    stock: 1,
+    precio: 620000,
+    imagen: "atx_case_gamer",
+    specs: [
+      { label: "Procesador", value: "AMD Ryzen 5 4650G 3.7Ghz < 4.2Ghz / ASUS Prime A320M-K" },
+      { label: "Memoria RAM", value: "16GB DDR4 3200Mhz Aimerican Heatsink (Nuevo)" },
+      { label: "Almacenamiento", value: "480GB M2. NVME Forza (Nuevo)" },
+      { label: "Gráficos", value: "AMD Radeon Graphics (Vega 7)" },
+      { label: "Monitores", value: "Opcional" },
+      { label: "Puertos y WiFi", value: "HDMI / VGA -  Sonido 5.1 / 4 USB 3.0 + 2 USB 2.0" },
+      { label: "Gabinete", value: "Standard USADO + Fuente GOLDENFIELD 600W" },
+      { label: "Periféricos", value: "Mouse y teclado USB" },
+      { label: "Sistema Operativo", value: "A elección" }
     ]
   },
   {
@@ -183,7 +156,7 @@ const PRODUCTOS_CATALOGO_DEFAULT = [
     id: "pc-oficina-i5-3330",
     seccion: 2,
     titulo: "PC ESCRITORIO INTEL CORE i5",
-    stock: 6, // 6 Unidades -> Stock Disponible
+    stock: 6, // -> Stock Disponible
     precio: 180000,
     imagen: "atx_case_office",
     specs: [
@@ -637,6 +610,7 @@ function renderCatalog() {
         else if (specLabelLower.includes("periférico")) specIcon = "⌨️";
         else if (specLabelLower.includes("sistema") || specLabelLower.includes("operativo")) specIcon = "⚙️";
         else if (specLabelLower.includes("placa madre") || specLabelLower.includes("mother")) specIcon = "📟";
+        else if (specLabelLower.includes("motherboard")) specIcon = "📟";
 
         return `
           <li>
