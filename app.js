@@ -45,26 +45,26 @@ const CATEGORIAS_DEFAULT = [
     desc: "Plataformas de 4ta generación Intel Core i5 estables, duraderas y preparadas para oficina o comercio."
   },
   {
-    "id": 6,
-    "titulo": "6. LINEA EXTREMA",
-    "icon": "🔥",
-    "class": "sec-gamer",
-    "desc": "Equipos de ultima generación Potentes"
+    id: 6,
+    titulo: "6. LINEA EXTREMA",
+    icon: "🔥",
+    class: "sec-gamer",
+    desc: "Equipos de ultima generación Potentes"
   }
 ];
 
 // Base de Datos por defecto de Computadoras
 const PRODUCTOS_CATALOGO_DEFAULT = [
-  // --- SECCIÓN 1: LÍNEA GAMER Y ALTO RENDIMIENTO ---
   {
     id: "pc-gamer-apu-a8",
     seccion: 1,
     titulo: "PC ESCRITORIO GAMER AMD APU A8 9600",
-    stock: 1, // 1 Unidad -> Muestra "¡ÚLTIMA UNIDAD!"
-    precio: 329000,
-    imagen: "gamer_case_neon", // ID para renderizado de gabinete dinámico o ruta de imagen
+    stock: 1,
+    precio: 359000,
+    imagen: "gamer_case_neon",
     specs: [
       { label: "Procesador", value: "AMD APU A8 9600 (Gen. 7ª)" },
+      { label: "Motherboard", value: "ASUS PRIME A320M-K" },
       { label: "Memoria RAM", value: "8GB DDR4 (Expandible a 32GB)" },
       { label: "Almacenamiento", value: "Disco M.2 NVME 120GB + 500GB HDD" },
       { label: "Gráficos", value: "Tarjeta Gráfica VEGA 7 GRAPHICS ONBOARD" },
@@ -83,7 +83,8 @@ const PRODUCTOS_CATALOGO_DEFAULT = [
     precio: 620000,
     imagen: "atx_case_gamer",
     specs: [
-      { label: "Procesador", value: "AMD Ryzen 5 4650G 3.7Ghz < 4.2Ghz / ASUS Prime A320M-K" },
+      { label: "Procesador", value: "AMD Ryzen 5 4650G 3.7Ghz < 4.2Ghz" },
+      { label: "Motherboard", value: "ASUS Prime A320M-K" },
       { label: "Memoria RAM", value: "16GB DDR4 3200Mhz Aimerican Heatsink (Nuevo)" },
       { label: "Almacenamiento", value: "480GB M2. NVME Forza (Nuevo)" },
       { label: "Gráficos", value: "AMD Radeon Graphics (Vega 7)" },
@@ -132,8 +133,6 @@ const PRODUCTOS_CATALOGO_DEFAULT = [
       { label: "Sistema Operativo", value: "Windows 11 Pro Incluido" }
     ]
   },
-
-  // --- SECCIÓN 2: HOGAR, ESTUDIO Y OFICINA ---
   {
     id: "pc-oficina-i3-9100",
     seccion: 2,
@@ -143,8 +142,10 @@ const PRODUCTOS_CATALOGO_DEFAULT = [
     imagen: "slim_case_bangho",
     specs: [
       { label: "Procesador", value: "Intel Core i3 9100 (Gen. 9ª)" },
+      { label: "Motherboard", value: "Gigabyte H110M" },
       { label: "Memoria RAM", value: "8GB DDR4 (Expandible a 32GB)" },
       { label: "Almacenamiento", value: "Disco SSD Gigabyte 240GB" },
+      { label: "Gráficos", value: "Intel HD Graphics" },
       { label: "Monitores", value: "Soporta hasta 2 monitores Full HD+" },
       { label: "Puertos y WiFi", value: "Conexiones USB 2.0 x6 / USB 3.0 x2 / USB-C x1 + Placa WiFi" },
       { label: "Gabinete", value: "Gabinete Slim BANGHO con Fuente 400W" },
@@ -156,7 +157,7 @@ const PRODUCTOS_CATALOGO_DEFAULT = [
     id: "pc-oficina-i5-3330",
     seccion: 2,
     titulo: "PC ESCRITORIO INTEL CORE i5",
-    stock: 6, // -> Stock Disponible
+    stock: 6,
     precio: 180000,
     imagen: "atx_case_office",
     specs: [
@@ -169,8 +170,6 @@ const PRODUCTOS_CATALOGO_DEFAULT = [
       { label: "Sistema Operativo", value: "Windows 11 Pro Incluido" }
     ]
   },
-
-  // --- SECCIÓN 3: OPCIONES ECONÓMICAS - GENERACIÓN 2 Y 3 ---
   {
     id: "pc-eco-i5-3330",
     seccion: 3,
@@ -222,8 +221,6 @@ const PRODUCTOS_CATALOGO_DEFAULT = [
       { label: "Sistema Operativo", value: "Windows 11 Pro Incluido" }
     ]
   },
-
-  // --- SECCIÓN 4: MÁS POTENCIA, MÁS POSIBILIDADES - GENERACIÓN 2 ---
   {
     id: "pc-potencia-i5-2310",
     seccion: 4,
@@ -277,8 +274,6 @@ const PRODUCTOS_CATALOGO_DEFAULT = [
       { label: "Sistema Operativo", value: "Windows 11 Pro Incluido" }
     ]
   },
-
-  // --- SECCIÓN 5: GEN 4 - RENDIMIENTO CONFIABLE ---
   {
     id: "pc-gen4-i5-4590-h81",
     seccion: 5,
