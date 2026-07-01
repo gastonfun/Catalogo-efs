@@ -477,6 +477,88 @@ function setupFormListeners() {
     return lines.join("\n");
   }
 
+  // --- SINCRONIZACIÓN AUTOMÁTICA CON FILE SYSTEM ACCESS API ---
+  const btnSyncAppJs = document.getElementById("btn-sync-appjs");
+  const btnClearAppJs = document.getElementById("btn-clear-appjs");
+  const syncStatus = document.getElementById("sync-file-status");
+  let appJsFileHandle = null;
+
+  async function performAppJsSync() {
+    try {
+      if (!appJsFileHandle) {
+        // Pedir al usuario que seleccione el archivo app.js
+        [appJsFileHandle] = await window.showOpenFilePicker({
+          types: [{
+            description: 'JavaScript Files',
+            accept: { 'text/javascript': ['.js'] },
+          }],
+          multiple: false
+        });
+      }
+
+      // Actualizar UI para mostrar archivo seleccionado
+      syncStatus.innerHTML = `✅ Archivo vinculado: <strong>${appJsFileHandle.name}</strong>`;
+      if (btnClearAppJs) btnClearAppJs.style.display = "inline-block";
+
+      // Leer el contenido actual del archivo
+      const file = await appJsFileHandle.getFile();
+      let fileContents = await file.text();
+
+      // Generar los nuevos códigos
+      const newProductsCode = formatProductsCode(productos);
+      const newCategoriesCode = formatCategoriasCode(categorias);
+
+      // Usar RegEx para reemplazar el contenido
+      const prodRegex = /const\s+PRODUCTOS_CATALOGO_DEFAULT\s*=\s*\[[\s\S]*?\];/;
+      const catRegex = /const\s+CATEGORIAS_DEFAULT\s*=\s*\[[\s\S]*?\];/;
+
+      if (!prodRegex.test(fileContents) || !catRegex.test(fileContents)) {
+        alert("⚠️ No se encontraron las bases de datos en este archivo. ¿Estás seguro que seleccionaste el 'app.js' correcto?");
+        // Resetear handle para que vuelva a elegir
+        appJsFileHandle = null;
+        syncStatus.innerHTML = "📂 Ningún archivo seleccionado";
+        if (btnClearAppJs) btnClearAppJs.style.display = "none";
+        return;
+      }
+
+      fileContents = fileContents.replace(prodRegex, newProductsCode);
+      fileContents = fileContents.replace(catRegex, newCategoriesCode);
+
+      // Escribir de vuelta al disco
+      const writable = await appJsFileHandle.createWritable();
+      await writable.write(fileContents);
+      await writable.close();
+
+      alert("🎉 ¡app.js actualizado con éxito! Ya puedes hacer git commit y git push.");
+
+    } catch (err) {
+      if (err.name !== 'AbortError') {
+        console.error("Error en sincronización:", err);
+        alert("Hubo un error al sincronizar el archivo. Por favor, usa el método manual.");
+      }
+    }
+  }
+
+  if (btnSyncAppJs) {
+    if (!('showOpenFilePicker' in window)) {
+      // Si el navegador no soporta la API, ocultamos la sync automática y abrimos la manual
+      const syncBox = document.querySelector('.sync-box');
+      const manualDetails = document.querySelector('.export-manual-details');
+      if (syncBox) syncBox.style.display = 'none';
+      if (manualDetails) manualDetails.setAttribute('open', 'true');
+    } else {
+      btnSyncAppJs.addEventListener("click", performAppJsSync);
+    }
+  }
+
+  if (btnClearAppJs) {
+    btnClearAppJs.addEventListener("click", () => {
+      appJsFileHandle = null;
+      syncStatus.innerHTML = "📂 Ningún archivo seleccionado";
+      btnClearAppJs.style.display = "none";
+    });
+  }
+
   if (btnExportCode && codeOutput) {
     btnExportCode.addEventListener("click", () => {
       const code = formatProductsCode(productos);

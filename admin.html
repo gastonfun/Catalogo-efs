@@ -222,31 +222,38 @@
       <section id="tab-exportar" class="tab-pane">
         <div class="export-box">
           <h2>Exportar Base de Datos para GitHub Pages</h2>
-          <p>Dado que GitHub Pages no utiliza bases de datos de servidor, tus cambios se guardan localmente en tu
-            navegador. Para hacerlos públicos a todos tus clientes, sigue estos pasos:</p>
 
-          <ol class="export-steps">
-            <li>Haz clic en el botón de abajo para <strong>Copiar el Código</strong>.</li>
-            <li>Abre tu archivo local <code>app.js</code> en tu editor de código.</li>
-            <li>Busca las líneas donde inicia la base de datos por defecto (<code>PRODUCTOS_CATALOGO_DEFAULT</code> y
-              <code>CATEGORIAS_DEFAULT</code>).</li>
-            <li>Reemplaza esas secciones con el código copiado.</li>
-            <li>Guarda el archivo y haz un <code>git commit</code> y <code>git push</code> a tu repositorio de GitHub.
-            </li>
-          </ol>
-
-          <div class="export-actions">
-            <button id="btn-export-code" class="btn-admin-submit">📋 Copiar Base de Datos de Productos</button>
-            <button id="btn-export-cats" class="btn-admin-submit"
-              style="background-color: var(--neon-purple); border-color: var(--neon-purple);">📋 Copiar Base de Datos de
-              Categorías</button>
+          <!-- === MÉTODO AUTOMÁTICO (recomendado) === -->
+          <div class="sync-box">
+            <h3>🚀 Sincronización Automática <span class="sync-badge">Recomendado</span></h3>
+            <p>Actualiza <code>PRODUCTOS_CATALOGO_DEFAULT</code> y <code>CATEGORIAS_DEFAULT</code> directamente en tu
+              <code>app.js</code> local con un solo clic. Después solo queda hacer <code>git commit</code> y
+              <code>git push</code>.
+            </p>
+            <div id="sync-file-status" class="sync-file-status">📂 Ningún archivo seleccionado</div>
+            <div class="export-actions">
+              <button id="btn-sync-appjs" class="btn-sync-primary">🔄 Sincronizar con app.js</button>
+              <button id="btn-clear-appjs" class="btn-cancel" style="display:none;">✕ Cambiar archivo</button>
+            </div>
           </div>
 
-          <div class="code-preview-container">
-            <label>Vista Previa del Código:</label>
-            <textarea id="code-output" class="code-textarea" readonly
-              placeholder="El código aparecerá aquí..."></textarea>
-          </div>
+          <!-- === MÉTODO MANUAL (fallback) === -->
+          <details class="export-manual-details">
+            <summary>📋 Método manual — copiar y pegar</summary>
+            <p style="margin-top:0.75rem; color:#94a3b8; font-size:0.875rem;">Usá esto si tu navegador no soporta
+              escritura de archivos (Firefox) o si preferís hacerlo a mano.</p>
+            <div class="export-actions" style="margin-top:0.75rem;">
+              <button id="btn-export-code" class="btn-admin-submit">📋 Copiar Productos</button>
+              <button id="btn-export-cats" class="btn-admin-submit"
+                style="background-color: var(--neon-purple); border-color: var(--neon-purple);">📋 Copiar
+                Categorías</button>
+            </div>
+            <div class="code-preview-container">
+              <label>Vista Previa del Código:</label>
+              <textarea id="code-output" class="code-textarea" readonly
+                placeholder="El código aparecerá aquí..."></textarea>
+            </div>
+          </details>
         </div>
       </section>
 
